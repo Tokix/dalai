@@ -1,6 +1,7 @@
 version: '3.7'
 services:
   dalai:
+    image: registry.gitlab.com/apps-lab/kiwi/services/ml/models/dalai:latest
     build: .
     ports:
       - 3000:3000
