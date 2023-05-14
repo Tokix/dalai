@@ -21,22 +21,24 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get update \
     && apt-get install -y nodejs
 
+RUN mkdir /.npm
+RUN chown -R 1000740000:0 "/.npm"
+
 
 WORKDIR /opt/dalai
 
 
-
 #Fix npm permission
-RUN mkdir ".npm-packages"
-RUN npm config set prefix "/opt/dalai/.npm-packages"
+#RUN mkdir ".npm-packages"
+#RUN npm config set prefix "/opt/dalai/.npm-packages"
 
-RUN NPM_PACKAGES="${HOME}/.npm-packages"
+#RUN NPM_PACKAGES="/opt/dalai/.npm-packages"
 
-RUN export PATH="$PATH:$NPM_PACKAGES/bin"
+#RUN export PATH="$PATH:$NPM_PACKAGES/bin"
 
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
-RUN export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+#RUN export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 # Install dalai and its dependencies
 RUN npm install dalai@0.3.1
