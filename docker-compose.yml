@@ -6,5 +6,5 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./models/alpaca:/root/dalai/alpaca
-      - ./models/llama:/root/dalai/llama
+      - ./models/alpaca:/opt/dalai/alpaca
+      - ./models/llama:/opt/dalai/llama

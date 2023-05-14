@@ -21,7 +21,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get update \
     && apt-get install -y nodejs
 
-WORKDIR /root/dalai
+
+WORKDIR /opt/dalai
+
+RUN chgrp -R 0 /opt/dalai && chmod -R g=u /opt/dalai
 
 # Install dalai and its dependencies
 RUN npm install dalai@0.3.1
