@@ -29,7 +29,7 @@ RUN chgrp -R 0 /opt/dalai && chmod -R g=u /opt/dalai
 
 #Fix npm permission
 RUN mkdir ".npm-packages"
-npm config set prefix "/opt/dalai/.npm-packages"
+RUN npm config set prefix "/opt/dalai/.npm-packages"
 
 RUN NPM_PACKAGES="${HOME}/.npm-packages"
 
