@@ -22,7 +22,9 @@ RUN apt-get update \
     && apt-get install -y nodejs
 
 RUN mkdir /.npm
+RUN mkdir /dalai
 RUN chown -R 1000740000:0 "/.npm"
+RUN chown -R 1000740000:0 "/dalai"
 
 
 WORKDIR /opt/dalai
