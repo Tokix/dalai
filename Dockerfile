@@ -12,7 +12,8 @@ RUN apt-get update \
 	git \
         make \
         python3-venv \
-        software-properties-common
+        software-properties-common  \
+        screen
 
 # Add NodeSource PPA to get Node.js 18.x
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
@@ -27,14 +28,14 @@ RUN chown -R 1000740000:0 "/.npm"
 RUN chown -R 1000740000:0 "/dalai"
 
 
-WORKDIR /opt/dalai
+WORKDIR /dalai
 
 
 #Fix npm permission
 #RUN mkdir ".npm-packages"
-#RUN npm config set prefix "/opt/dalai/.npm-packages"
+#RUN npm config set prefix "/dalai/.npm-packages"
 
-#RUN NPM_PACKAGES="/opt/dalai/.npm-packages"
+#RUN NPM_PACKAGES="/dalai/.npm-packages"
 
 #RUN export PATH="$PATH:$NPM_PACKAGES/bin"
 
@@ -48,7 +49,7 @@ RUN npm install dalai@0.3.1
 RUN npx dalai alpaca setup
 
 
-RUN chgrp -R 0 /opt/dalai && chmod -R g=u /opt/dalai
+RUN chgrp -R 0 /dalai && chmod -R g=u /dalai
 
 
 # Run the dalai server
