@@ -43,7 +43,7 @@ RUN mkdir /home/dalai/.npm
 #RUN export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 # Install dalai and its dependencies
-RUN npm install dalai@0.3.1
+RUN npm install https://github.com/Tokix/dalai
 
 #RUN npx dalai alpaca setup
 
