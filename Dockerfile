@@ -22,13 +22,12 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get update \
     && apt-get install -y nodejs
 
-RUN mkdir /.npm
-RUN mkdir /dalai
-RUN chown -R 1000740000:0 "/.npm"
-RUN chown -R 1000740000:0 "/dalai"
+RUN useradd -ms /bin/bash dalai
+RUN usermod -aG 0 dalai
+WORKDIR /home/dalai
 
 
-WORKDIR /dalai
+RUN mkdir /home/dalai/.npm
 
 
 #Fix npm permission
@@ -46,11 +45,17 @@ WORKDIR /dalai
 # Install dalai and its dependencies
 RUN npm install dalai@0.3.1
 
-RUN npx dalai alpaca setup
+#RUN npx dalai alpaca setup
 
+RUN mkdir /home/dalai/dalai
+RUN mkdir /home/dalai/dalai/llama
+RUN mkdir /home/dalai/dalai/alpaca
 
-RUN chgrp -R 0 /dalai && chmod -R g=u /dalai
+RUN chown -R 1000740000:0 "/home/dalai/.npm"
+RUN chown -R 1000740000:0 "/home/dalai"
+RUN chgrp -R 0 /home/dalai && chmod -R g=u /home/dalai
 
+USER dalai
 
 # Run the dalai server
 CMD [ "npx", "dalai", "serve" ]
